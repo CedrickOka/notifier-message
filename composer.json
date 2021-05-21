@@ -1,0 +1,24 @@
+{
+	"name" : "coka/notifier-message",
+	"type" : "library",
+	"description" : "Notifier Messenger Message",
+	"homepage" : "https://github.com/CedrickOka/notifier-message",
+	"license" : "MIT",
+	"authors" : [{
+			"name" : "Cedrick Oka",
+			"email" : "okacedrick@gmail.com"
+		}
+	],
+	"keywords" : [
+		"notifier",
+		"messenger"
+	],
+	"autoload" : {
+		"psr-4" : {
+			"Oka\\Notifier\\Message\\" : "src"
+		}
+	},
+	"require" : {
+		"php" : ">=7.2"
+	}
+}
