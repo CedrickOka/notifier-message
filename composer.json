@@ -4,14 +4,14 @@
 	"description" : "Notifier Messenger Message",
 	"homepage" : "https://github.com/CedrickOka/notifier-message",
 	"license" : "MIT",
+	"keywords" : [
+		"notifier",
+		"messenger"
+	],
 	"authors" : [{
 			"name" : "Cedrick Oka",
 			"email" : "okacedrick@gmail.com"
 		}
-	],
-	"keywords" : [
-		"notifier",
-		"messenger"
 	],
 	"autoload" : {
 		"psr-4" : {
@@ -20,5 +20,8 @@
 	},
 	"require" : {
 		"php" : ">=7.2"
+	},
+	"support" : {
+		"docs" : "https://github.com/CedrickOka/notifier-message/blob/master/src/README.md"
 	}
 }
