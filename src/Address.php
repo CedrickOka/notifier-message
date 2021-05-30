@@ -45,9 +45,13 @@ class Address
         return sprintf('%s <%s>', $this->name, $this->value);
     }
     
+    /**
+     * @param array|string $address
+     * @throws \InvalidArgumentException
+     */
     public static function create($address): self
     {
-        if (false === is_string($address) || false === is_array($address)) {
+        if (false === is_string($address) && false === is_array($address)) {
             throw new \InvalidArgumentException(sprintf('The "$address" arguments must be of type "string" or "array", "%s" given.', gettype($address)));
         }
         
