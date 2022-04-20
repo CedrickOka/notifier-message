@@ -6,12 +6,12 @@ namespace Oka\Notifier\Message;
  */
 class Notification
 {
-    private $channels;
-    private $sender;
-    private $receiver;
-    private $message;
-    private $title;
-    private $attributes;
+    protected $channels;
+    protected $sender;
+    protected $receiver;
+    protected $message;
+    protected $title;
+    protected $attributes;
     
     public function __construct(array $channels, Address $sender, Address $receiver, string $message, string $title = null, array $attributes = [])
     {

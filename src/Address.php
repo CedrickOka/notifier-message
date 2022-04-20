@@ -6,8 +6,8 @@ namespace Oka\Notifier\Message;
  */
 class Address
 {
-    private $name;
-    private $value;
+    protected $name;
+    protected $value;
     
     public function __construct(string $value, string $name = null)
     {
