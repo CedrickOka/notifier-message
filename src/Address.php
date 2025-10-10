@@ -6,11 +6,14 @@ namespace Oka\Notifier\Message;
  */
 class Address
 {
+    public const TYPE_DEFAULT = 'default';
+    public const TYPE_CONTACT = 'contact';
+
     protected $name;
     protected $value;
     protected $type;
 
-    public function __construct(string $value, string $name = null, string $type = null)
+    public function __construct(string $value, string $name = null, string $type = self::TYPE_DEFAULT)
     {
         $this->value = $value;
         $this->name = $name;
