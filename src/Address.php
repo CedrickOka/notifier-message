@@ -8,43 +8,53 @@ class Address
 {
     protected $name;
     protected $value;
-    
-    public function __construct(string $value, string $name = null)
+    protected $type;
+
+    public function __construct(string $value, string $name = null, string $type = null)
     {
         $this->value = $value;
         $this->name = $name;
+        $this->type = $type;
     }
-    
+
     public function getValue(): string
     {
         return $this->value;
     }
-    
+
     public function getName():? string
     {
         return $this->name;
     }
     
+    public function getType():? string
+    {
+        return $this->type;
+    }
+
     public function toArray(): array
     {
         $address = ['value' => $this->value];
-        
+
         if (null !== $this->name) {
             $address['name'] = $this->name;
         }
-        
+        if (null !== $this->type) {
+            $address['type'] = $this->type;
+        }
+
         return $address;
     }
-    
+
     public function __toString()
     {
         if (null === $this->name) {
             return $this->value;
         }
-        
+
         return sprintf('%s <%s>', $this->name, $this->value);
     }
-    
+
     /**
      * @param array|string $address
      * @throws \InvalidArgumentException
@@ -54,15 +64,13 @@ class Address
         if (false === is_string($address) && false === is_array($address)) {
             throw new \InvalidArgumentException(sprintf('The "$address" arguments must be of type "string" or "array", "%s" given.', gettype($address)));
         }
-        
         if (true === is_string($address)) {
             $address = ['value' => $address];
         }
-        
-        if ($diff = array_diff(array_keys($address), ['value', 'name'])) {
+        if ($diff = array_diff(array_keys($address), ['value', 'name', 'type'])) {
             throw new \InvalidArgumentException(sprintf('The following keys are not supported "%s".', implode(', ', $diff)));
         }
-        
-        return new self($address['value'], $address['name'] ?? null);
+
+        return new self($address['value'], $address['name'] ?? null, $address['type'] ?? null);
     }
 }

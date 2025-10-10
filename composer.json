@@ -1,27 +1,27 @@
 {
-	"name" : "coka/notifier-message",
-	"type" : "library",
-	"description" : "Notifier Messenger Message",
-	"homepage" : "https://github.com/CedrickOka/notifier-message",
-	"license" : "MIT",
-	"keywords" : [
-		"notifier",
-		"messenger"
-	],
-	"authors" : [{
-			"name" : "Cedrick Oka",
-			"email" : "okacedrick@gmail.com"
-		}
-	],
-	"autoload" : {
-		"psr-4" : {
-			"Oka\\Notifier\\Message\\" : "src"
-		}
-	},
-	"require" : {
-		"php" : ">=7.2"
-	},
-	"support" : {
-		"docs" : "https://github.com/CedrickOka/notifier-message/blob/master/src/README.md"
-	}
+    "name" : "coka/notifier-message",
+    "type" : "library",
+    "description" : "Notifier Messenger Message",
+    "homepage" : "https://github.com/CedrickOka/notifier-message",
+    "license" : "MIT",
+    "keywords" : [
+        "notifier",
+        "messenger"
+    ],
+    "authors" : [{
+            "name" : "Cedrick Oka",
+            "email" : "okacedrick@gmail.com"
+        }
+    ],
+    "autoload" : {
+        "psr-4" : {
+            "Oka\\Notifier\\Message\\" : "src"
+        }
+    },
+    "require" : {
+        "php" : ">=7.4"
+    },
+    "support" : {
+        "docs" : "https://github.com/CedrickOka/notifier-message/blob/master/src/README.md"
+    }
 }
