@@ -13,11 +13,11 @@ class Address
     protected $value;
     protected $type;
 
-    public function __construct(string $value, string $name = null, string $type = self::TYPE_DEFAULT)
+    public function __construct(string $value, ?string $name = null, ?string $type = null)
     {
         $this->value = $value;
         $this->name = $name;
-        $this->type = $type;
+        $this->type = $type ?? self::TYPE_DEFAULT;
     }
 
     public function getValue(): string
