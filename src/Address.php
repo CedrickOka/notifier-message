@@ -74,6 +74,6 @@ class Address
             throw new \InvalidArgumentException(sprintf('The following keys are not supported "%s".', implode(', ', $diff)));
         }
 
-        return new self($address['value'], $address['name'] ?? null, isset($address['type']) ? AddressType::from($address['type']) : null);
+        return new static($address['value'], $address['name'] ?? null, isset($address['type']) ? AddressType::from($address['type']) : null);
     }
 }

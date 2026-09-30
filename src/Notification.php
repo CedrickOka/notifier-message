@@ -171,7 +171,7 @@ class Notification
 
     public function fromArray(array $notification): self
     {
-        $self = new self(
+        $self = new static(
             $notification['channels'],
             Address::create($notification['sender']),
             Address::create($notification['receiver']),
