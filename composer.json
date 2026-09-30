@@ -19,7 +19,7 @@
         }
     },
     "require" : {
-        "php" : ">=7.4"
+        "php" : ">=8.1"
     },
     "support" : {
         "docs" : "https://github.com/CedrickOka/notifier-message/blob/master/src/README.md"

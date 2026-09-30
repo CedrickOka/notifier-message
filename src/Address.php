@@ -1,23 +1,21 @@
 <?php
 namespace Oka\Notifier\Message;
 
+use Oka\Notifier\Enum\AddressType;
+
 /**
  * @author Cedrick Oka Baidai <okacedrick@gmail.com>
  */
 class Address
 {
-    public const TYPE_DEFAULT = 'default';
-    public const TYPE_CONTACT = 'contact';
-
-    protected $name;
-    protected $value;
-    protected $type;
-
-    public function __construct(string $value, ?string $name = null, ?string $type = null)
-    {
-        $this->value = $value;
-        $this->name = $name;
-        $this->type = $type ?? self::TYPE_DEFAULT;
+    public function __construct(
+        protected string $value,
+        protected ?string $name = null,
+        protected ?AddressType $type = null
+    ) {
+        if (null === $type) {
+            $this->type = AddressType::Default;
+        }
     }
 
     public function getValue(): string
@@ -25,31 +23,31 @@ class Address
         return $this->value;
     }
 
-    public function getName():? string
+    public function getName(): ?string
     {
         return $this->name;
     }
-    
-    public function getType():? string
+
+    public function getType(): AddressType
     {
         return $this->type;
     }
 
     public function toArray(): array
     {
-        $address = ['value' => $this->value];
+        $address = [
+            'type' => $this->type->value,
+            'value' => $this->value,
+        ];
 
         if (null !== $this->name) {
             $address['name'] = $this->name;
-        }
-        if (null !== $this->type) {
-            $address['type'] = $this->type;
         }
 
         return $address;
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         if (null === $this->name) {
             return $this->value;
@@ -74,6 +72,6 @@ class Address
             throw new \InvalidArgumentException(sprintf('The following keys are not supported "%s".', implode(', ', $diff)));
         }
 
-        return new self($address['value'], $address['name'] ?? null, $address['type'] ?? null);
+        return new self($address['value'], $address['name'] ?? null, isset($address['type']) ? AddressType::from($address['type']) : null);
     }
 }
