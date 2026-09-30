@@ -169,7 +169,7 @@ class Notification
         return $notification;
     }
 
-    public function fromArray(array $notification): self
+    public static function create(array $notification): static
     {
         $self = new static(
             $notification['channels'],
