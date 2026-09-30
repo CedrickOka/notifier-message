@@ -1,6 +1,6 @@
 <?php
 
-namespace Oka\Notifier\Enum;
+namespace Oka\Notifier\Message\Enum;
 
 /**
  * @author Cedrick Oka Baidai <okacedrick@gmail.com>
