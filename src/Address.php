@@ -1,7 +1,8 @@
 <?php
+
 namespace Oka\Notifier\Message;
 
-use Oka\Notifier\Enum\AddressType;
+use Oka\Notifier\Message\Enum\AddressType;
 
 /**
  * @author Cedrick Oka Baidai <okacedrick@gmail.com>
@@ -11,7 +12,7 @@ class Address
     public function __construct(
         protected string $value,
         protected ?string $name = null,
-        protected ?AddressType $type = null
+        protected ?AddressType $type = null,
     ) {
         if (null === $type) {
             $this->type = AddressType::Default;
@@ -58,6 +59,7 @@ class Address
 
     /**
      * @param array|string $address
+     *
      * @throws \InvalidArgumentException
      */
     public static function create($address): self
