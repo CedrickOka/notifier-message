@@ -1,36 +1,37 @@
 <?php
 namespace Oka\Notifier\Message;
 
+use Oka\Notifier\Enum\NotificationPriority;
+
 /**
  * @author Cedrick Oka Baidai <okacedrick@gmail.com>
  */
 class Notification
 {
-    protected $channels;
-    protected $sender;
-    protected $receiver;
-    protected $message;
-    protected $title;
-    protected $attributes;
+    public function __construct(
+        protected array|string $channels,
+        protected Address $sender,
+        protected Address $receiver,
+        protected string $message,
+        protected string $title = null,
+        protected array $attributes = [],
+        protected ?NotificationPriority $priority = null,
+    ) {
+        $this->channels = is_array($channels) ? $channels : [$channels];
 
-    public function __construct(array $channels, Address $sender, Address $receiver, string $message, string $title = null, array $attributes = [])
-    {
-        $this->channels = $channels;
-        $this->sender = $sender;
-        $this->receiver = $receiver;
-        $this->message = $message;
-        $this->title = $title;
-        $this->attributes = $attributes;
-    }
-
-    public function getChannels(): array
-    {
-        return $this->channels;
+        if (null === $priority) {
+            $this->priority = NotificationPriority::Normal;
+        }
     }
 
     public function hasChannel(string $channel): bool
     {
         return in_array($channel, $this->channels, true);
+    }
+
+    public function getChannels(): array
+    {
+        return $this->channels;
     }
 
     public function addChannel(string $channel): self
@@ -45,6 +46,7 @@ class Notification
     public function setChannels(array $channels): self
     {
         $this->channels = [];
+
         foreach ($this->channels as $channel) {
             $this->addChannel($channel);
         }
@@ -110,6 +112,11 @@ class Notification
         return $this;
     }
 
+    public function hasAttribute(string $name): bool
+    {
+        return isset($this->attributes[$name]);
+    }
+
     public function getAttributes(): array
     {
         return $this->attributes;
@@ -122,9 +129,21 @@ class Notification
         return $this;
     }
 
-    public function addAttribute(string $name, $value): self
+    public function addAttribute(string $name, mixed $value): self
     {
         $this->attributes[$name] = $value;
+
+        return $this;
+    }
+
+    public function getPriority(): NotificationPriority
+    {
+        return $this->priority;
+    }
+
+    public function setPriority(NotificationPriority $priority): self
+    {
+        $this->priority = $priority;
 
         return $this;
     }
@@ -135,7 +154,8 @@ class Notification
             'channels' => $this->channels,
             'sender' => $this->sender->toArray(),
             'receiver' => $this->receiver->toArray(),
-            'message' => $this->message
+            'message' => $this->message,
+            'priority' => $this->priority->value,
         ];
 
         if (null !== $this->title) {
@@ -157,8 +177,29 @@ class Notification
             $notification['message'],
             $notification['title'] ?? null,
             $notification['attributes'] ?? [],
+            isset($notification['priority']) ? NotificationPriority::from($notification['type']) : null,
         );
 
         return $self;
+    }
+
+    public function __serialize(): array
+    {
+        return $this->toArray();
+    }
+
+    public function __unserialize(array $data): void
+    {
+        $this->channels = $data['channels'];
+        $this->sender = Address::create($data['sender']);
+        $this->receiver = Address::create($data['receiver']);
+        $this->message = $data['message'];
+
+        if (true === isset($data['title'])) {
+            $this->title = $data['title'];
+        }
+        if (true === isset($data['attributes'])) {
+            $this->attributes = $data['attributes'];
+        }
     }
 }
