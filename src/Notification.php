@@ -1,7 +1,8 @@
 <?php
+
 namespace Oka\Notifier\Message;
 
-use Oka\Notifier\Enum\NotificationPriority;
+use Oka\Notifier\Message\Enum\NotificationPriority;
 
 /**
  * @author Cedrick Oka Baidai <okacedrick@gmail.com>
@@ -13,8 +14,8 @@ class Notification
         protected Address $sender,
         protected Address $receiver,
         protected string $message,
-        protected string $title = null,
-        protected array $attributes = [],
+        protected ?string $title = null,
+        protected ?array $attributes = [],
         protected ?NotificationPriority $priority = null,
     ) {
         $this->channels = is_array($channels) ? $channels : [$channels];
@@ -100,7 +101,7 @@ class Notification
         return $this;
     }
 
-    public function getTitle():? string
+    public function getTitle(): ?string
     {
         return $this->title;
     }
