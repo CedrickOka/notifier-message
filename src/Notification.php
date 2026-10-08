@@ -15,14 +15,10 @@ class Notification
         protected Address $receiver,
         protected string $message,
         protected ?string $title = null,
-        protected ?array $attributes = [],
-        protected ?NotificationPriority $priority = null,
+        protected array $attributes = [],
+        protected NotificationPriority $priority = NotificationPriority::Normal,
     ) {
         $this->channels = is_array($channels) ? $channels : [$channels];
-
-        if (null === $priority) {
-            $this->priority = NotificationPriority::Normal;
-        }
     }
 
     public function hasChannel(string $channel): bool
