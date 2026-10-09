@@ -9,16 +9,22 @@ use Oka\Notifier\Message\Enum\NotificationPriority;
  */
 class Notification
 {
+    /**
+     * @var NotificationPriority
+     */
+    protected $priority;
+
     public function __construct(
         protected array|string $channels,
         protected Address $sender,
         protected Address $receiver,
         protected string $message,
         protected ?string $title = null,
-        protected array $attributes = [],
-        protected NotificationPriority $priority = NotificationPriority::Normal,
+        protected ?array $attributes = [],
+        ?NotificationPriority $priority = NotificationPriority::Normal,
     ) {
         $this->channels = is_array($channels) ? $channels : [$channels];
+        $this->priority = $priority;
     }
 
     public function hasChannel(string $channel): bool
@@ -152,7 +158,7 @@ class Notification
             'sender' => $this->sender->toArray(),
             'receiver' => $this->receiver->toArray(),
             'message' => $this->message,
-            'priority' => $this->priority->value,
+            'priority' => $this->priority?->value ?? NotificationPriority::Normal->value,
         ];
 
         if (null !== $this->title) {
