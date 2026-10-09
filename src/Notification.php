@@ -21,10 +21,10 @@ class Notification
         protected string $message,
         protected ?string $title = null,
         protected ?array $attributes = [],
-        ?NotificationPriority $priority = NotificationPriority::Normal,
+        ?NotificationPriority $priority = null,
     ) {
         $this->channels = is_array($channels) ? $channels : [$channels];
-        $this->priority = $priority;
+        $this->priority = $priority ?? NotificationPriority::Normal;
     }
 
     public function hasChannel(string $channel): bool
