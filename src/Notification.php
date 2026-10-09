@@ -114,6 +114,11 @@ class Notification
         return isset($this->attributes[$name]);
     }
 
+    public function getAttribute(string $name, mixed $defaultValue): mixed
+    {
+        return $this->attributes[$name] ?? $defaultValue;
+    }
+
     public function getAttributes(): array
     {
         return $this->attributes;
