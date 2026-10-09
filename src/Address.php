@@ -14,9 +14,7 @@ class Address
         protected ?string $name = null,
         protected ?AddressType $type = null,
     ) {
-        if (null === $type) {
-            $this->type = AddressType::Default;
-        }
+        $this->type = $type ?? AddressType::Default;
     }
 
     public function getValue(): string
