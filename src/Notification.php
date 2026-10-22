@@ -10,6 +10,16 @@ use Oka\Notifier\Message\Enum\NotificationPriority;
 class Notification
 {
     /**
+     * @var string
+     */
+    protected $title;
+
+    /**
+     * @var array
+     */
+    protected $attributes;
+
+    /**
      * @var NotificationPriority
      */
     protected $priority;
@@ -19,8 +29,8 @@ class Notification
         protected Address $sender,
         protected Address $receiver,
         protected string $message,
-        protected ?string $title = null,
-        protected ?array $attributes = [],
+        ?string $title = null,
+        ?array $attributes = [],
         ?NotificationPriority $priority = null,
     ) {
         $this->channels = is_array($channels) ? $channels : [$channels];
@@ -108,7 +118,7 @@ class Notification
         return $this->title;
     }
 
-    public function setTitle(string $title): self
+    public function setTitle(?string $title = null): self
     {
         $this->title = $title;
 
