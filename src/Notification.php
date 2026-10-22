@@ -30,10 +30,12 @@ class Notification
         protected Address $receiver,
         protected string $message,
         ?string $title = null,
-        ?array $attributes = [],
+        array $attributes = [],
         ?NotificationPriority $priority = null,
     ) {
         $this->channels = is_array($channels) ? $channels : [$channels];
+        $this->title = $title;
+        $this->attributes = $attributes;
         $this->priority = $priority ?? NotificationPriority::Normal;
     }
 
